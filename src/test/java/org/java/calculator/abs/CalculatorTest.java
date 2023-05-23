@@ -4,54 +4,54 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+import java.util.Random;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
 public class CalculatorTest {
 	private Calculator c;
+	private static final int NUM_TESTS = 10;
+	private static final int RND_BOUND = 100;
+	private static float num1;
+	private static float num2;
 	
 	@BeforeEach
 	public void init() {
+		Random rnd = new Random();
+		
 		c = new Calculator() {
 		};
+		
+		num1 = rnd.nextFloat(RND_BOUND);
+		num2 = rnd.nextFloat(RND_BOUND);
 	}
 	
-	@Test
+	@RepeatedTest(NUM_TESTS)
     public void getAddTest() {
-		float num1 = 2;
-		float num2 = 3;
-        float expectedValue = 5;
+        float expectedValue = num1+num2;
         float actualValue = c.add(num1 , num2);
         assertEquals(expectedValue, actualValue , "Addizione");
     }
 
-    @Test
+	@RepeatedTest(NUM_TESTS)
     public void getSubstactTest() {
-    	float num1 = 15;
-    	float num2 = 5;
-        float expectedValue = 10;
+        float expectedValue = num1-num2;
         float actualValue = c.substract(num1 , num2);
         assertEquals(expectedValue, actualValue, "Sottrazione");
     }
 
-    @Test
+	@RepeatedTest(NUM_TESTS)
     public void getDivideTest() {
-    	float num1 = 20;
-    	float num2 = 2;
-    	
     	assumeTrue(num2!=0);
     	
-        float expectedValue = 10;
+        float expectedValue = num1/num2;
         float actualValue = c.divide(num1, num2);
         assertEquals(expectedValue, actualValue, "Divisione");
     }
     
-    @Test
+	@RepeatedTest(NUM_TESTS)
 	public void getDivExcTest() {
-    	float num1 = 20;
-    	float num2 = 2;
-    	
 		assumeTrue(num2 == 0);
 		
 		assertThrows(Exception.class,
@@ -59,13 +59,10 @@ public class CalculatorTest {
 				"Deve sollevare eccezione");
 	}
 
-    @Test
+	@RepeatedTest(NUM_TESTS)
     public void getMultiplyTest() {
-    	float num1 = 50;
-    	float num2 = 2;
-    	
-        float expectedValue = 100;
-        float actualValue = c.multiply(50, 2);
+        float expectedValue = num1*num2;
+        float actualValue = c.multiply(num1, num2);
         assertEquals(expectedValue, actualValue, "Moltiplicazione");
     }
 
