@@ -76,14 +76,14 @@ public class EmployeeTest {
 	
 	@RepeatedTest(NUM_TESTS)
 	public void setRoleTest() {
-		assumeTrue(role == "employee" || role == "boss");
+		assumeTrue(role.equals("employee") || role.equals("boss"));
 		assertNotEquals("employee" , role , "Creazione data di nascita per employee");
 		assertNotEquals("boss" , role , "Creazione data di nascita per employee");
 	}
 	
 	@RepeatedTest(NUM_TESTS)
 	public void setRoleExTest() throws Exception {
-		assertTrue(!(role == "employee" && role == "boss"));
+		assertTrue(!(role.equals("employee") && role.equals("boss")));
 		assertThrows(Exception.class, () -> e.setRole(role),"Deve sollevare un eccezione");
 	}
 	

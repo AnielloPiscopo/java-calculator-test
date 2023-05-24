@@ -54,7 +54,7 @@ public class Employee {
 	public void setRole(String role) throws Exception {
 		Helper.isStrContainsWhiteSpaces(role);
 		for(String roleName: ROLES_LIST) {
-			if(roleName == role.toLowerCase()) {
+			if(roleName.equals(role.toLowerCase())) {
 				this.role = role.toLowerCase();
 				return;
 			}
